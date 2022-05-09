@@ -12,6 +12,7 @@ public class RegistrationService {
 
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
+    private static AppUserRepository appUserRepository;
 
     public String register(RegistrationRequest request) {
        boolean isValidEmail = emailValidator.test(request.getEmail());
