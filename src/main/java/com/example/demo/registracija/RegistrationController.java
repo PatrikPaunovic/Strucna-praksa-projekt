@@ -1,21 +1,55 @@
 package com.example.demo.registracija;
 
+import com.example.demo.appuser.AppUser;
+import com.example.demo.appuser.AppUserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/registracija")
 @AllArgsConstructor
 public class RegistrationController {
 
-    private RegistrationService registrationService;
+    private final RegistrationService registrationService;
 
     @PostMapping
     public String register(@RequestBody RegistrationRequest request){
 
         return registrationService.register(request);
+    }
+    
+    @GetMapping("{userId}")
+    public ResponseEntity<AppUser> getUserById(@PathVariable Long userId){
+        AppUser user = appUserRepository.findById(userId).
+                orElseThrow(() ->
+                        new IllegalStateException("Korisnik sa userId " + userId + " ne postoji"));
+                return ResponseEntity.ok(user);
+    }
+
+    @PutMapping("{userId}")
+    public ResponseEntity<AppUser> updateUser(@PathVariable Long userId,@RequestBody AppUser appUserDetails){
+        AppUser updateUser = appUserRepository.findById(userId).
+                orElseThrow(() ->
+                        new IllegalStateException("Korisnik sa userId " + userId + " ne postoji"));
+        updateUser.setFirstname(appUserDetails.getFirstname());
+        updateUser.setLastname(appUserDetails.getLastname());
+        updateUser.setEmail(appUserDetails.getEmail());
+
+        appUserRepository.save(updateUser);
+        return ResponseEntity.ok(updateUser);
+    }
+
+    @DeleteMapping("{userId}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long userId){
+
+        AppUser appUser = appUserRepository.findById(userId).
+                orElseThrow(() ->
+                        new IllegalStateException("Korisnik sa userId " + userId + " ne postoji"));
+
+        appUserRepository.delete(appUser);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
