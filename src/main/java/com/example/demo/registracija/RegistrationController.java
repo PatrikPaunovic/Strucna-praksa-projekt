@@ -42,14 +42,9 @@ public class RegistrationController {
         return ResponseEntity.ok(updateUser);
     }
 
-    @DeleteMapping("{userId}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long userId){
-
-        AppUser appUser = appUserRepository.findById(userId).
-                orElseThrow(() ->
-                        new IllegalStateException("Korisnik sa userId " + userId + " ne postoji"));
-
-        appUserRepository.delete(appUser);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/api/v1/registracija/{userId}")
+    @ResponseBody
+    public void deleteTopic(@PathVariable Long userId){
+        RegistrationService.deleteTopic(userId);
     }
 }
