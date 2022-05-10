@@ -1,9 +1,6 @@
 package com.example.demo.appuser;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,19 +13,20 @@ import java.util.Collections;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class AppUser implements UserDetails {
 
 
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
+            name = "user_sequence",
+            sequenceName = "user_sequence",
             allocationSize = 1
     )
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            generator = "user_sequence"
     )
     private Long userId;
     private String username;
@@ -72,8 +70,12 @@ public class AppUser implements UserDetails {
         return email;
     }
 
-    public String getFirstname() {
+    public String getFirstname(){
         return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     @Override
