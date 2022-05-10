@@ -13,7 +13,15 @@ public class RegistrationService {
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private static AppUserRepository appUserRepository;
-
+    
+    public static void deleteTopic(Long userId) {
+        boolean exists = appUserRepository.existsById(userId);
+        if (!exists){
+            throw new IllegalStateException("korisnik sa userId " + userId + " ne postoji");
+        }
+        appUserRepository.deleteById(userId);
+    }
+    
     public String register(RegistrationRequest request) {
        boolean isValidEmail = emailValidator.test(request.getEmail());
        if(!isValidEmail){
@@ -21,9 +29,9 @@ public class RegistrationService {
        }
        return appUserService.signUpUser(
                new AppUser(
+                       request.getUsername(),
                        request.getFirstname(),
                        request.getLastname(),
-                       request.getUsername(),
                        request.getEmail(),
                        request.getPassword(),
                        AppUserRole.USER
