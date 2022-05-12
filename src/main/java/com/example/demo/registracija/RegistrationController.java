@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     private final RegistrationService registrationService;
+    
+    @Autowired
+    private AppUserRepository appUserRepository;
 
     @PostMapping
     public String register(@RequestBody RegistrationRequest request){
