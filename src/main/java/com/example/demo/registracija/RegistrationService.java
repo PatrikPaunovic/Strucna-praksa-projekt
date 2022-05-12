@@ -1,9 +1,11 @@
 package com.example.demo.registracija;
-
 import com.example.demo.appuser.AppUser;
+import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.appuser.AppUserRole;
 import com.example.demo.appuser.AppUserService;
+
 import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 @Service
