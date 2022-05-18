@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final AppUserService appUserService;
-    private final EmailValidator emailValidator;
+    private AppUserService appUserService;
+    private EmailValidator emailValidator;
     private static AppUserRepository appUserRepository;
     
     public static void deleteTopic(Long userId) {
