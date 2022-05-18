@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class RegistrationController {
 
-    private final RegistrationService registrationService;
+    private RegistrationService registrationService;
     
     @Autowired
     private AppUserRepository appUserRepository;
