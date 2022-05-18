@@ -16,11 +16,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
 
-    private  final static String USER_NOT_FOUND_MSG =
+    private static String USER_NOT_FOUND_MSG =
             "Korisnik sa računom %s nije pronađen";
-    private final AppUserRepository appUserRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final ConfirmationTokenService confirmationTokenService;
+    private AppUserRepository appUserRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private ConfirmationTokenService confirmationTokenService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
