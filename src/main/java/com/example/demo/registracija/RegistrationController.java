@@ -2,9 +2,9 @@ package com.example.demo.registracija;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     private RegistrationService registrationService;
+    public  AppUserService appUserService;
     
     @Autowired
     private AppUserRepository appUserRepository;
@@ -45,9 +46,9 @@ public class RegistrationController {
         return ResponseEntity.ok(updateUser);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/api/v1/registracija/{userId}")
+    @DeleteMapping(path = "{userId}")
     @ResponseBody
-    public void deleteTopic(@PathVariable Long userId){
-        RegistrationService.deleteTopic(userId);
+    public void deleteTopic(@PathVariable("userId") Long userId){
+        registrationService.deleteTopic(userId);
     }
 }
