@@ -14,9 +14,9 @@ public class RegistrationService {
 
     private AppUserService appUserService;
     private EmailValidator emailValidator;
-    private static AppUserRepository appUserRepository;
+    private AppUserRepository appUserRepository;
     
-    public static void deleteTopic(Long userId) {
+    public void deleteTopic(Long userId) {
         boolean exists = appUserRepository.existsById(userId);
         if (!exists){
             throw new IllegalStateException("korisnik sa userId " + userId + " ne postoji");
