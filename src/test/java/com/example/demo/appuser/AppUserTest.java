@@ -52,14 +52,8 @@ class AppUserTest {
     @Test
     void getLocked() {
         AppUser tester = new AppUser();
-        Boolean response = tester.isEnabled();
-        assertEquals(true,response);
+        Boolean response = tester.getLocked();
+        assertEquals(false,response);
     }
 
-    @Test
-    void setUserId() {
-        AppUser userLogin = new AppUser();
-        userLogin.setUsername("Korisnicko_ime");
-
-    }
 }
