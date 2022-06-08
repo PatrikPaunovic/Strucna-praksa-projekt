@@ -19,7 +19,6 @@ public class AppUserService implements UserDetailsService {
     private static String USER_NOT_FOUND_MSG =
             "Korisnik sa računom %s nije pronađen";
     private AppUserRepository appUserRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private ConfirmationTokenService confirmationTokenService;
 
     @Override
@@ -35,10 +34,6 @@ public class AppUserService implements UserDetailsService {
         if(userExists){
             throw  new IllegalStateException("Uneseni email je u upotrebi");
         }
-
-        String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
-
-        appUser.setPassword(encodedPassword);
 
         appUserRepository.save(appUser);
 
