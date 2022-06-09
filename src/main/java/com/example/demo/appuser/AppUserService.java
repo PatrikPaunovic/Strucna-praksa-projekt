@@ -30,6 +30,6 @@ public class AppUserService implements UserDetailsService {
 
         appUserRepository.save(appUser);
 
-        return token;
+        return "prolaz";
     }
 }
