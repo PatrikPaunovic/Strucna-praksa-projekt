@@ -45,8 +45,17 @@ class AppUserTest {
     @Test
     void getUserId() {
         AppUser tester = new AppUser();
+        tester.setUserId(2L);
         Long response = tester.getUserId();
-        assertEquals(null,response);
+        assertEquals(2L,response);
+    }
+    
+    @Test
+    void getUsername() {
+        AppUser tester = new AppUser();
+        tester.setUsername("username");
+        String response = tester.getUsername();
+        assertEquals("username",response);
     }
 
     @Test
